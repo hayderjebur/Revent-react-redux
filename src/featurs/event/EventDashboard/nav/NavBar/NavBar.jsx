@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { Button, Menu, Container } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, withRouter } from "react-router-dom";
 import { SignedOutMenu } from "../Menus/SignedOutMenu";
 import { SignedinMenu } from "../Menus/SignedinMenu";
 
 class NavBar extends Component {
   state = {
-    authenticated: true
+    authenticated: false
   };
   handleSignIn = () => this.setState({ authenticated: true });
-  handleSignOut = () => this.setState({ authenticated: false });
+  handleSignOut = () => {
+    this.setState({ authenticated: false });
+    this.props.history.push("/");
+  };
 
   render() {
     const { authenticated } = this.state;
@@ -44,4 +47,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
